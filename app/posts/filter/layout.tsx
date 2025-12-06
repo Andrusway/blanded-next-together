@@ -1,13 +1,32 @@
+// import css from './layout.module.css';
+
+// type LayoutPostsProps = {
+//   children: React.ReactNode;
+//   sidebar: React.ReactNode;
+// };
+
+// export default function LayoutPosts({ children, sidebar }: LayoutPostsProps) {
+//   return (
+//     <main className={css.container}>
+//       <div className={css.postsWrapper}>
+//         {children}
+//       </div>
+//     </main>
+//   );
+// }
+
 import css from './layout.module.css';
 
-type LayoutPostsProps = {
+type LayoutNotesProps = {
   children: React.ReactNode;
+  sidebar: React.ReactNode;
 };
 
-export default function LayoutPosts({ children }: LayoutPostsProps) {
+export default function LayoutNotes({ children, sidebar }: LayoutNotesProps) {
   return (
-    <main className={css.container}>
-      <div className={css.postsWrapper}>{children}</div>
-    </main>
+    <section className={css.container}>
+      <aside className={css.sidebar}>{sidebar}</aside>
+      <div className={css.notesWrapper}>{children}</div>
+    </section>
   );
 }
