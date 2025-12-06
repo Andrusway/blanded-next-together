@@ -1,8 +1,26 @@
-// import { fetchPosts } from '@/lib/api';
+import { fetchPosts } from '@/lib/api';
+import PostsClient from './Posts.client';
 
-export default async function PostsPage({ params }) {
+interface PostsPageProps {
+  params: Promise<{ slug: string[] }>;
+}
+
+// type PostsPageProps = { params: Promise<{ slug: string[] }> };
+
+export default async function PostsPage({ params }: PostsPageProps) {
   const { slug } = await params;
   console.log(slug);
 
-  return <>Клієнтський компонент для сторінки постів</>;
+  const userId: string = slug[0];
+  const data = await fetchPosts({
+    searchText: '',
+    page: 1,
+    ...(userId && userId !== 'All' && { userId }),
+  });
+
+  return (
+    <>
+      <PostsClient initialData={data} userId={userId} />
+    </>
+  );
 }
